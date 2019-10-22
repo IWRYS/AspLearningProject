@@ -1,0 +1,23 @@
+﻿@model IEnumerable<asp.net.LearningProject.Models.Employee>
+
+    <table>
+        <thead>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Email</th>
+        <th>Town</th>
+        </thead>
+        <tbody>
+            @foreach (var employee in Model)
+            {
+                <tr>
+                    <td>@employee.Name</td>
+                    <td>@employee.Department</td>
+                    <td>@employee.Email</td>
+                    <td>@employee.TownId</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
