@@ -18,9 +18,13 @@ namespace asp.net.LearningProject.Controllers
             this.employeeRepository = employeeRepository;
 
         }
-        public string Index()
+
+        [Route ("")]
+        [Route("Home")]
+        public IActionResult Home()
         {
-            return System.Diagnostics.Process.GetCurrentProcess().ProcessName;
+            var model = employeeRepository.GetEmployees();
+            return View(model);
         }
 
         [HttpGet]
