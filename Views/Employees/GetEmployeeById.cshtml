@@ -1,16 +1,29 @@
-﻿@model EmployeeDetailsViewmodel 
+﻿@model EmployeeDetailsViewmodel
 
-    <h1>@Model.PageTitle</h1>
 
-    <div>
-        Name: @Model.Employee.Name
+<h1>@Model.PageTitle</h1>
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                <h1>@Model.Employee.Name</h1>
+            </div>
+
+            <div class="card-body text-center">
+                <h4>Employee ID : @Model.Employee.EmployeeId</h4>
+                <h4>Email : @Model.Employee.Email</h4>
+                <h4>Department : @Model.Employee.Department</h4>
+                <h4>Town: @Model.Town</h4>
+
+            </div>
+
+            <div class="card-footer text-center">
+                <a asp-controller="home" asp-action="index" class="btn btn-primary">Back</a>
+            </div>
+        </div>
     </div>
-    <div>
-        Email: @Model.Employee.Email
-    </div>
-    <div>
-        Department: @Model.Employee.Department
-    </div>
-    <div>
-        Town: @Model.Employee.Town.Name
-    </div>
+</div>
+
+
+
