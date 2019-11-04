@@ -1,30 +1,35 @@
 ﻿@model EmployeeDetailsViewmodel
 
 @{
-  
+
     ViewBag.Title = "Create Employee";
 }
-    
 
 
-    <form asp-controller="Employees" asp-action="CreateEmployee" method="post" class="">
-        <div>
-            <label asp-for="Employee.Name">Name</label>
-            <input asp-for="Employee.Name" />
-        </div>
-        <div>
-            <label asp-for="Employee.Email">Email</label>
-            <input asp-for="Employee.Email" />
-        </div>
-        <div>
-            <label asp-for="Employee.Department">Department</label>
-            <select asp-for="Employee.Department" asp-items="Html.GetEnumSelectList<Departament>()"></select>
-        </div>
-        <div>
-            <label asp-for="Employee.TownId">TownId</label>
-            <input asp-for="Employee.TownId"/>
-        </div>
-        <div>|
-            <button type="submit">Create Employee</button>
-        </div>
-    </form>
+
+<form asp-controller="Employees" asp-action="CreateEmployee" method="post" class="">
+    <div>
+        <label asp-for="Employee.Name">Name</label>
+        <input asp-for="Employee.Name" />
+    </div>
+    <div>
+        <label asp-for="Employee.Email">Email</label>
+        <input asp-for="Employee.Email" />
+    </div>
+    <div>
+        <label asp-for="Employee.Department">Department</label>
+        <select asp-for="Employee.Department" asp-items="Html.GetEnumSelectList<Departament>()"></select>
+    </div>
+    <div>
+        <label asp-for="Employee.TownId">TownId</label>
+        <input asp-for="Employee.TownId" />
+    </div>
+    <div>
+        <button type="submit">Create Employee</button>
+    </div>
+
+</form>
+<div>
+    <a asp-controller="home" asp-action="index" class="btn btn-primary m-1 align-content-center">Back</a>
+</div>
+

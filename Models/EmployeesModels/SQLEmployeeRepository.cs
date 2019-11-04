@@ -6,7 +6,7 @@ namespace asp.net.LearningProject.Models.EmployeesModels
     public class SQLEmployeeRepository : IEmployeeRepository
     {
         private readonly MyProjectDBContext context;
-        public SQLEmployeeRepository(MyProjectDBContext context )
+        public SQLEmployeeRepository(MyProjectDBContext context)
         {
             this.context = context;
         }
@@ -21,25 +21,35 @@ namespace asp.net.LearningProject.Models.EmployeesModels
         public Employee Delete(int id)
         {
             Employee employee = context.Employees.Find(id);
-            if(employee != null)
+            if (employee != null)
             {
                 context.Employees.Remove(employee);
                 context.SaveChanges();
             }
             return employee;
-            
+
         }
 
         public string EmployeeTown(int id)
         {
             var employee = context.Employees.Find(id);
-            var town = context.Towns.Find(employee.TownId);
-            return town.Name;
+            string townName = string.Empty;
+            if (employee != null)
+            {
+                var town = context.Towns.Find(employee.TownId);
+                townName = town.Name;
+            }
+
+            return townName;
+
         }
 
         public Employee GetEmployee(int id)
         {
-            return context.Employees.Find(id);
+            var employee = context.Employees.Find(id);
+
+          
+            return employee;
         }
 
         public IEnumerable<Employee> GetEmployees()

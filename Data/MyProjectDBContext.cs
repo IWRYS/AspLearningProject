@@ -16,7 +16,10 @@ namespace asp.net.LearningProject.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Employee>().HasOne(x => x.Town).WithMany(x => x.Employees);
+            modelBuilder.Entity<Employee>()
+                .HasOne(x => x.Town)
+                .WithMany(e => e.Employees)
+                .HasForeignKey(x=>x.TownId);
             modelBuilder.Seed();
                 
         }

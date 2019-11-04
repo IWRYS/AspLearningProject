@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using asp.net.LearningProject.ViewModels;
-
+using System.Net;
 
 namespace asp.net.LearningProject.Controllers
 {
@@ -19,7 +19,7 @@ namespace asp.net.LearningProject.Controllers
 
         }
 
-        [Route ("")]
+        [Route("")]
         [Route("Home")]
         public IActionResult Home()
         {
@@ -30,15 +30,24 @@ namespace asp.net.LearningProject.Controllers
         [HttpGet]
         public IActionResult GetEmployeeById(int id)
         {
-            EmployeeDetailsViewmodel employee = new EmployeeDetailsViewmodel()
+            var currEmployee = employeeRepository.GetEmployee(id);
+            EmployeeDetailsViewmodel employee = null;
+            string pageTitle = string.Empty;
+            if (currEmployee != null)
             {
-                Employee = employeeRepository.GetEmployee(id),
-                PageTitle = "Employee Details",
-                Town = employeeRepository.EmployeeTown(id)
+                pageTitle = "Employee Details";
+                employee = new EmployeeDetailsViewmodel()
+                {
+                  Employee = currEmployee,
+                  PageTitle = pageTitle,
+                  Town = employeeRepository.EmployeeTown(id)
+                };
+                return View(employee);
 
-            };
+            }
 
-            return View(employee);
+            return RedirectToAction("home");
+
         }
 
         [HttpGet]
@@ -49,7 +58,7 @@ namespace asp.net.LearningProject.Controllers
         }
 
 
-    
+
         public IActionResult Delete(int id)
         {
             employeeRepository.Delete(id);
@@ -86,7 +95,7 @@ namespace asp.net.LearningProject.Controllers
             return View(employee);
         }
         [HttpPost]
-        public IActionResult EditEmployee(int id,Employee employee)
+        public IActionResult EditEmployee(int id, Employee employee)
         {
             employeeRepository.Update(employee);
 
