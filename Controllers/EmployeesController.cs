@@ -33,7 +33,7 @@ namespace asp.net.LearningProject.Controllers
             EmployeeDetailsViewmodel employee = new EmployeeDetailsViewmodel()
             {
                 Employee = employeeRepository.GetEmployee(id),
-                PageTitle = "Searched Employee Details",
+                PageTitle = "Employee Details",
                 Town = employeeRepository.EmployeeTown(id)
 
             };
@@ -49,11 +49,11 @@ namespace asp.net.LearningProject.Controllers
         }
 
 
-        [HttpDelete]
+    
         public IActionResult Delete(int id)
         {
             employeeRepository.Delete(id);
-            return View();
+            return RedirectToAction("home");
         }
 
 
@@ -63,14 +63,21 @@ namespace asp.net.LearningProject.Controllers
         {
             return View();
         }
-
         [HttpPost]
-        public IActionResult CreateEmployee(Employee newEmployee)
+        public RedirectToActionResult CreateEmployee(EmployeeDetailsViewmodel employeeDetails)
         {
+            var newEmployee = new Employee();
+            newEmployee.Name = employeeDetails.Employee.Name;
+            newEmployee.Email = employeeDetails.Employee.Email;
+            newEmployee.Department = employeeDetails.Employee.Department;
+            newEmployee.TownId = employeeDetails.Employee.TownId;
+
             employeeRepository.Add(newEmployee);
 
-            return View();
+            return RedirectToAction("GetEmployeeById", new { id = newEmployee.EmployeeId });
         }
+
+
 
         [HttpGet]
         public IActionResult EditEmployee(int id)

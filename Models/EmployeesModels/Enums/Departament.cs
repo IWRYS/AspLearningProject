@@ -2,6 +2,7 @@
 {
     public enum Departament
     {
+        None=0,
         HR=1,
         IT=2,
         Production=3,

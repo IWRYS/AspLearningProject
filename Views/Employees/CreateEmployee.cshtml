@@ -1,4 +1,4 @@
-﻿@model Employee
+﻿@model EmployeeDetailsViewmodel
 
 @{
   
@@ -6,17 +6,25 @@
 }
     
 
-    <form action="Employees/CreateEmployee" method="post">
-        
-          Employee Name:<br>
-           <input type="text" name="Name"><br>
-           Email :<br>
-           <input type="text" name="Email"><br><br>
-           Department:<br>
-           <input type="number" name="Department"><br><br>
-           Town :<br>
-           <input type="number" name="TownId"><br><br>
 
-            <input type="submit" value="Submit">
-        
+    <form asp-controller="Employees" asp-action="CreateEmployee" method="post" class="">
+        <div>
+            <label asp-for="Employee.Name">Name</label>
+            <input asp-for="Employee.Name" />
+        </div>
+        <div>
+            <label asp-for="Employee.Email">Email</label>
+            <input asp-for="Employee.Email" />
+        </div>
+        <div>
+            <label asp-for="Employee.Department">Department</label>
+            <select asp-for="Employee.Department" asp-items="Html.GetEnumSelectList<Departament>()"></select>
+        </div>
+        <div>
+            <label asp-for="Employee.TownId">TownId</label>
+            <input asp-for="Employee.TownId"/>
+        </div>
+        <div>|
+            <button type="submit">Create Employee</button>
+        </div>
     </form>

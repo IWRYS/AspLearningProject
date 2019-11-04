@@ -23,8 +23,13 @@ using asp.net.LearningProject.ViewModels;
 
 #line default
 #line hidden
+#line 3 "C:\Users\dushichka\Desktop\asp\aspLearningProject\asp.net.LearningProject\Views\_ViewImports.cshtml"
+using asp.net.LearningProject.Models.EmployeesModels.Enums;
+
+#line default
+#line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"8fec21ebdf194fd40eee21bd546498d4e48e31e1", @"/Views/Employees/EditEmployee.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"e549426c519ddd439afc11622477b31d76648899", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"abe714a3fb97e19d96e18a5ef32f50d4533f1530", @"/Views/_ViewImports.cshtml")]
     public class Views_Employees_EditEmployee : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<Employee>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("action", new global::Microsoft.AspNetCore.Html.HtmlString("Employees/EditEmployee"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -65,7 +70,7 @@ using asp.net.LearningProject.ViewModels;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(66, 450, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8fec21ebdf194fd40eee21bd546498d4e48e31e14453", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8fec21ebdf194fd40eee21bd546498d4e48e31e14656", async() => {
                 BeginContext(118, 391, true);
                 WriteLiteral(@"
     <fieldset>

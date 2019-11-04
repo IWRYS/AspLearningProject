@@ -23,8 +23,13 @@ using asp.net.LearningProject.ViewModels;
 
 #line default
 #line hidden
+#line 3 "C:\Users\dushichka\Desktop\asp\aspLearningProject\asp.net.LearningProject\Views\_ViewImports.cshtml"
+using asp.net.LearningProject.Models.EmployeesModels.Enums;
+
+#line default
+#line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9e65badfca5cd13c83c5f7a9413128e4b14de29f", @"/Views/Employees/AllEmployees.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"e549426c519ddd439afc11622477b31d76648899", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"abe714a3fb97e19d96e18a5ef32f50d4533f1530", @"/Views/_ViewImports.cshtml")]
     public class Views_Employees_AllEmployees : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<Employee>>
     {
         #pragma warning disable 1998
