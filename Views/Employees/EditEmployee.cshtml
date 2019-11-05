@@ -1,21 +1,48 @@
 ﻿@model Employee
 
 @{
+
     ViewBag.Title = "Edit Employee";
 }
 
-<form action="Employees/EditEmployee" method="post">
-    <fieldset>
-       
-        Employee Name:<br>
-        <input type="text" name="Name"><br>
-        Email :<br>
-        <input type="text" name="Email"><br><br>
-        Department:<br>
-        <input type="number" name="Department"><br><br>
-        Town :<br>
-        <input type="number" name="TownId"><br><br>
+<h1 align="center">@ViewBag.Title</h1>
 
-        <input type="submit" value="Submit">
-    </fieldset>
+<form asp-controller="Employees" asp-action="EditEmployee" method="post">
+    <input hidden asp-for="EmployeeId" />
+    <div class="row justify-content-center m-3">
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-body text-center">
+                    <div>
+                        <label asp-for="@Model.Name">Name</label>
+                        <input asp-for="@Model.Name" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+
+                    </div>
+                    <div>
+                        <label asp-for="@Model.Email">Email</label>
+                        <input asp-for="@Model.Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+
+                    </div>
+
+                    <div>
+                        <label asp-for="@Model.TownId">TownId</label>
+                        <input asp-for="@Model.TownId" />
+                    </div>
+                    <div>
+                        <label asp-for="@Model.Department">Department</label>
+                        <select asp-for="@Model.Department" asp-items="Html.GetEnumSelectList<Departament>()"></select>
+                        <span asp-validation-for="Department" class="text-danger"></span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </form>
+<div align ="center">
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a asp-controller="home" asp-action="index" class="btn btn-primary </div>m-1 align-content-center">Cancel</a>
+</div>
+

@@ -14,7 +14,7 @@ namespace asp.net.LearningProject.Models
         public string Name { get; set; }
 
         [Required]
-       // [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$)]",ErrorMessage ="Invalid Email Format!")]
+      // [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$)]",ErrorMessage ="Invalid Email Format!")]
         public string Email { get; set; }
 
         [Required]

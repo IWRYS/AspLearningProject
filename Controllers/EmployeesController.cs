@@ -73,19 +73,22 @@ namespace asp.net.LearningProject.Controllers
             return View();
         }
         [HttpPost]
-        public RedirectToActionResult CreateEmployee(EmployeeDetailsViewmodel employeeDetails)
+        public IActionResult CreateEmployee(EmployeeDetailsViewmodel employeeDetails)
         {
-            var newEmployee = new Employee();
-            newEmployee.Name = employeeDetails.Employee.Name;
-            newEmployee.Email = employeeDetails.Employee.Email;
-            newEmployee.Department = employeeDetails.Employee.Department;
-            newEmployee.TownId = employeeDetails.Employee.TownId;
+            if (ModelState.IsValid)
+            {
+                var newEmployee = new Employee();
+                newEmployee.Name = employeeDetails.Employee.Name;
+                newEmployee.Email = employeeDetails.Employee.Email;
+                newEmployee.Department = employeeDetails.Employee.Department;
+                newEmployee.TownId = employeeDetails.Employee.TownId;
 
-            employeeRepository.Add(newEmployee);
+                employeeRepository.Add(newEmployee);
 
-            return RedirectToAction("GetEmployeeById", new { id = newEmployee.EmployeeId });
+                return RedirectToAction("GetEmployeeById", new { id = newEmployee.EmployeeId });
+            }
+            return View();
         }
-
 
 
         [HttpGet]
@@ -94,12 +97,23 @@ namespace asp.net.LearningProject.Controllers
             var employee = employeeRepository.GetEmployee(id);
             return View(employee);
         }
-        [HttpPost]
-        public IActionResult EditEmployee(int id, Employee employee)
-        {
-            employeeRepository.Update(employee);
 
-            return View(employee);
+        [HttpPost]
+        public IActionResult EditEmployee(Employee model)
+        {
+            if (ModelState.IsValid)
+            {
+                var employee = employeeRepository.GetEmployee(model.EmployeeId);
+                employee.Name = model.Name;
+                employee.Department = model.Department;
+                employee.Email = model.Email;
+                employee.TownId = model.TownId;
+
+                employeeRepository.Update(employee);
+
+                return RedirectToAction("GetEmployeeById", new { id = employee.EmployeeId });
+            }
+            return View();
         }
     }
 }
