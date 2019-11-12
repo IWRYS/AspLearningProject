@@ -28,26 +28,25 @@ namespace asp.net.LearningProject.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetEmployeeById(int id)
+        public IActionResult GetEmployeeById(int? id)
         {
-            var currEmployee = employeeRepository.GetEmployee(id);
-            EmployeeDetailsViewmodel employee = null;
-            string pageTitle = string.Empty;
-            if (currEmployee != null)
-            {
-                pageTitle = "Employee Details";
-                employee = new EmployeeDetailsViewmodel()
-                {
-                  Employee = currEmployee,
-                  PageTitle = pageTitle,
-                  Town = employeeRepository.EmployeeTown(id)
-                };
-                return View(employee);
+            
+            var  currEmployee = employeeRepository.GetEmployee(id.Value);
 
+            if (currEmployee == null)
+            {
+                Response.StatusCode = 404;
+                return View("EmployeeNotFound", id.Value);
             }
 
-            return RedirectToAction("home");
+            EmployeeDetailsViewmodel employee = new EmployeeDetailsViewmodel()
+            {
+                Employee = currEmployee,
+                PageTitle = "Employee Details",
+                Town = employeeRepository.EmployeeTown(currEmployee.EmployeeId)
+            };
 
+            return View(employee);
         }
 
         [HttpGet]

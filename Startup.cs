@@ -45,6 +45,11 @@ namespace asp.net.LearningProject
 
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseStatusCodePagesWithReExecute("/Error/{0}");
+            }
 
             // to serve static files use UseStaticFiles()
             // to serve default files use UseDefaultFiles()
@@ -56,12 +61,12 @@ namespace asp.net.LearningProject
             // app.UseFileServer(fileServerOptions);
 
             app.UseFileServer();
-            app.UseMvcWithDefaultRoute();
-          
-            app.Run(async (context) =>
+            app.UseMvc(routes =>
             {
-                await context.Response.WriteAsync("StartPage");
+                routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
+          
+           
         }
     }
 }
