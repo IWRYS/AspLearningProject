@@ -2,10 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using asp.net.LearningProject.Models.ModelBuilderExtentions;
 using asp.net.LearningProject.Models.AdressModels;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace asp.net.LearningProject.Data
 {
-    public class MyProjectDBContext : DbContext
+    public class MyProjectDBContext : IdentityDbContext
     {
         public MyProjectDBContext(DbContextOptions<MyProjectDBContext> options) 
             :base(options)
@@ -16,6 +17,9 @@ namespace asp.net.LearningProject.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+
             modelBuilder.Entity<Employee>()
                 .HasOne(x => x.Town)
                 .WithMany(e => e.Employees)

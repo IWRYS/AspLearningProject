@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-
-namespace asp.net.LearningProject
+﻿namespace asp.net.LearningProject
 {
+    using Microsoft.AspNetCore;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.Logging;
+    using NLog.Extensions.Logging;
+
     public class Program
     {
         public static void Main(string[] args)
@@ -19,6 +15,14 @@ namespace asp.net.LearningProject
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+            .ConfigureLogging((hostingContext, logging) =>
+            {
+                logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                logging.AddConsole();
+                logging.AddDebug();
+                logging.AddEventSourceLogger();
+                logging.AddNLog();
+            })
+            .UseStartup<Startup>();
     }
 }

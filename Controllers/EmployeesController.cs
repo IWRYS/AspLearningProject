@@ -6,17 +6,23 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using asp.net.LearningProject.ViewModels;
 using System.Net;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Hosting;
 
 namespace asp.net.LearningProject.Controllers
 {
     public class EmployeesController : Controller
     {
         private readonly IEmployeeRepository employeeRepository;
+        private readonly IHostingEnvironment hostingEnvironment;
+        private readonly ILogger logger;
 
-        public EmployeesController(IEmployeeRepository employeeRepository)
+        public EmployeesController(IEmployeeRepository employeeRepository,IHostingEnvironment hostingEnvironment,
+            ILogger<EmployeesController> logger)
         {
             this.employeeRepository = employeeRepository;
-
+            this.hostingEnvironment = hostingEnvironment;
+            this.logger = logger;
         }
 
         [Route("")]
@@ -30,12 +36,13 @@ namespace asp.net.LearningProject.Controllers
         [HttpGet]
         public IActionResult GetEmployeeById(int? id)
         {
-            
+
             var  currEmployee = employeeRepository.GetEmployee(id.Value);
 
             if (currEmployee == null)
             {
                 Response.StatusCode = 404;
+                logger.LogWarning("no such employee");
                 return View("EmployeeNotFound", id.Value);
             }
 

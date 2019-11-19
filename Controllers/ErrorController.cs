@@ -1,13 +1,19 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace aspNetCoreLearningProject.Controllers
+﻿namespace aspNetCoreLearningProject.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Diagnostics;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Logging;
+
     public class ErrorController : Controller
     {
+        private readonly ILogger<ErrorController> logger;
+
+        public ErrorController(ILogger<ErrorController> logger)
+        {
+            this.logger = logger;
+        }
+
         [Route("Error/{statusCode}")]
         public IActionResult HttpStatusCodeHandler(int statusCode)
         {
@@ -16,9 +22,9 @@ namespace aspNetCoreLearningProject.Controllers
             if (statusCode == 404)
             {
                 ViewBag.ErrorMessage = "Resource not found.";
-                ViewBag.Path = statusCodeResult.OriginalPath;
-                ViewBag.QS = statusCodeResult.OriginalQueryString;
 
+                logger.LogWarning($"404 error occured. Path = {statusCodeResult.OriginalPath}\n" +
+                    $"Query string = {statusCodeResult.OriginalQueryString}");
             }
 
             return View("NotFound");
@@ -29,9 +35,8 @@ namespace aspNetCoreLearningProject.Controllers
         public IActionResult Error()
         {
             var exceptionDetails = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
-            ViewBag.ExceptionPath = exceptionDetails.Path;
-            ViewBag.ExceptionMessage = exceptionDetails.Error.Message;
-            ViewBag.ExceptionStackTrace = exceptionDetails.Error.StackTrace;
+
+            logger.LogError($"The path {exceptionDetails.Path} threw an exception {exceptionDetails.Error}");
 
             return View("Error");
         }

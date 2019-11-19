@@ -9,6 +9,7 @@ using asp.net.LearningProject.Models.TownsModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +29,8 @@ namespace asp.net.LearningProject
         {
             services.AddDbContextPool<MyProjectDBContext>(
                 options=> options.UseSqlServer(config.GetConnectionString("MyProjectDBConnection")));
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<MyProjectDBContext>();
             services.AddMvc();
             services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
             services.AddScoped<ITownRepository,SQLTownRepository>();
@@ -40,9 +43,8 @@ namespace asp.net.LearningProject
         {
             if (env.IsDevelopment())
             {
-              //  DeveloperExceptionPageOptions developerExceptionPageOptions = new DeveloperExceptionPageOptions();
-               //   developerExceptionPageOptions.SourceCodeLineCount = 10; // how many lines of code before and after the error in developer exception page
-
+                //  DeveloperExceptionPageOptions developerExceptionPageOptions = new DeveloperExceptionPageOptions();
+                //   developerExceptionPageOptions.SourceCodeLineCount = 10; // how many lines of code before and after the error in developer exception page
                 app.UseDeveloperExceptionPage();
             }
             else
@@ -61,6 +63,7 @@ namespace asp.net.LearningProject
             // app.UseFileServer(fileServerOptions);
 
             app.UseFileServer();
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
